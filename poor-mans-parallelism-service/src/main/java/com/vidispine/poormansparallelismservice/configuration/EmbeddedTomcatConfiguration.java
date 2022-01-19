@@ -18,9 +18,6 @@ public class EmbeddedTomcatConfiguration {
     @Value("${server.port}")
     private String serverPort;
 
-    @Value("${management.port:${server.port}}")
-    private String managementPort;
-
     @Value("${server.additionalPorts:null}")
     private String additionalPorts;
 
@@ -38,7 +35,7 @@ public class EmbeddedTomcatConfiguration {
         if (StringUtils.isBlank(this.additionalPorts))
             return null;
 
-        Set<String> defaultPorts = Sets.newHashSet(this.serverPort, this.managementPort);
+        Set<String> defaultPorts = Sets.newHashSet(this.serverPort);
         String[] ports = this.additionalPorts.split(",");
         List<Connector> result = new ArrayList<>();
         for (String port : ports) {
